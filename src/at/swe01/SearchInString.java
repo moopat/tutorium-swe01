@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 
 public class SearchInString {
 
+    // Textquelle: http://derstandard.at/2000010137826/Elga-Hausaerzteverband-pocht-weiter-auf-Freiwilligkeit
     static String text = "Der Österreichische Hausärzteverband kann sich immer noch nicht mit der Elektronischen Gesundheitsakte (Elga) anfreunden.\nFür Hausärztepräsident Christian Euler ist es eine kranke Akte. Konkret bezieht sich die Kritik auf die lange \nBearbeitungszeit der Abmeldungserklärungen und auf die Nichteinhaltung des Zeitplans. Der Hausärzteverband rät den \nPatienten weiterhin, sich von Elga abzumelden, also das Opt-out wahrzunehmen, fordert aber eigentlich ein System, das auf \nFreiwilligkeit basiert.";
 
     public static void main(String[] args) {
@@ -16,7 +17,7 @@ public class SearchInString {
         // Suchbegriff einlesen
         while(!isValidSearchTerm){
             searchTerm = readString("Bitte gib einen Suchbegriff ein: ");
-            if(searchTerm != null && searchTerm.length() > 1){
+            if(searchTerm != null && searchTerm.length() >= 1){
                 isValidSearchTerm = true;
             } else {
                 System.out.println("(!) Der Suchbegriff muss mindestens ein Zeichen lang sein!");

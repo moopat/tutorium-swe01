@@ -2,8 +2,10 @@ package at.swe01;
 
 public class PassportReader {
 
-    public static String line1 = "P<USA<KELSO<<BOB<<<<<<<<<<<<<<<<<<<<<<<<<<<";
-    public static String line2 = "L0287498<3USA4010120M160505<<<<<<<<<<<<<<<5";
+    // Die beiden maschinenlesbaren Zeilen des Reisepasses.
+    // Die Prüfziffern sind in diesem Beispiel nicht relevant.
+    public static String line1 = "P<USA<KELSO<<BOB<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
+    public static String line2 = "L0287498<3USA4010120M160505<<<<<<<<<<<<<<<<5";
 
     public static void main(String[] args){
         // Die Nationalität befindet sich immer zwischen 2. und 5. Position.
@@ -13,7 +15,7 @@ public class PassportReader {
         int endOfLastName = line1.indexOf("<<", 6);
         System.out.println("Nachname: " + line1.substring(6, endOfLastName));
 
-        // Der Vorname kommt nach dem Nachnamen und geht bis zum nächsten << (ein < alleine ist das Trennzeichen für den 2. Vornamen)
+        // Der Vorname kommt nach dem Nachnamen und geht bis zum nächsten << (ein < alleine wäre das Trennzeichen für den 2. Vornamen)
         int beginOfFirstName = endOfLastName + 2;
         System.out.println("Vorname: " + line1.substring(beginOfFirstName, line1.indexOf("<<", beginOfFirstName)));
 

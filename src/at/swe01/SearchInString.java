@@ -33,7 +33,7 @@ public class SearchInString {
 
         if(occurs){
             // Ausgeben, wie oft der Suchbegriff vorkommt.
-            System.out.println("\"" + searchTerm.toUpperCase() + "\" kommt " + getNumberOfOccurences(text, searchTerm) + " mal vor.");
+            System.out.println("\"" + searchTerm.toUpperCase() + "\" kommt " + getNumberOfOccurrences(text, searchTerm) + " mal vor.");
             // Den Suchbegriff im Text durch den Suchbegriff in Großschreibung ersetzen und ausgeben.
             System.out.println(text.replace(searchTerm, searchTerm.toUpperCase()));
         } else {
@@ -50,9 +50,9 @@ public class SearchInString {
      * @param search Suchbegriff
      * @return Anzahl der Vorkommnisse
      */
-    public static int getNumberOfOccurences(String text, String search){
+    public static int getNumberOfOccurrences(String text, String search){
         // Wir geben das Ergebnis für eine Suche ab Stelle 0 zurück.
-        return getNumberOfOccurences(text, search, 0);
+        return getNumberOfOccurrences(text, search, 0);
     }
 
     /**
@@ -62,18 +62,18 @@ public class SearchInString {
      * @param offset Stelle, ab der gesucht wird
      * @return Anzahl der Vorkommnisse
      */
-    public static int getNumberOfOccurences(String text, String search, int offset){
+    public static int getNumberOfOccurrences(String text, String search, int offset){
         // Standardmäßig gehen wir davon aus, dass der Begriff nicht gefunden wird.
-        int occurences = 0;
+        int occurrences = 0;
         // Die Position des Suchbegriffs im Text, oder -1 falls er nicht vorkommt.
         int position = text.indexOf(search, offset);
         // Wenn der Begriff nicht gefunden wurde geben wir 0 zurück.
-        if(position < 0) return occurences;
-        // Ansonsten erhöhen wir die occurences auf 1
-        occurences++;
+        if(position < 0) return occurrences;
+        // Ansonsten erhöhen wir die occurrences auf 1
+        occurrences++;
         // Der rekursive Aufruf startet die Suche am Ende des letzten Treffers und liefert
         // zurück wie viele Treffer es ab der jeweiligen Position gibt.
-        return occurences + getNumberOfOccurences(text, search, position + search.length());
+        return occurrences + getNumberOfOccurrences(text, search, position + search.length());
     }
 
     /**

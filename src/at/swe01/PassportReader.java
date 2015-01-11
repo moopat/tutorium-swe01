@@ -15,7 +15,8 @@ public class PassportReader {
         int endOfLastName = line1.indexOf("<<", 6);
         System.out.println("Nachname: " + line1.substring(6, endOfLastName));
 
-        // Der Vorname kommt nach dem Nachnamen und geht bis zum nächsten << (ein < alleine wäre das Trennzeichen für den 2. Vornamen)
+        // Der Vorname kommt nach dem Nachnamen und geht bis zum nächsten <<
+        // (ein < alleine wäre das Trennzeichen für den 2. Vornamen)
         int beginOfFirstName = endOfLastName + 2;
         System.out.println("Vorname: " + line1.substring(beginOfFirstName, line1.indexOf("<<", beginOfFirstName)));
 

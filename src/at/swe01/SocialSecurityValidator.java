@@ -14,37 +14,56 @@ public class SocialSecurityValidator {
         /*
             Sozialversicherungsnummer einlesen und einfache Validierungen sofort durchführen:
             - Länge muss 10 sein
-            - Es dürfen nur Zahlen vorkommen
-            - Eventuell prüfen, ob das Datum plausibel ist (TODO)
+            - Es dürfen nur Zahlen vorkommen, bzw. ein "X" an 4. Stelle (am Index 0)
          */
         while(!isValidInput){
             socialSecurityNumber = readString("Bitte gib die 10-stellige Sozialversicherungsnummer ohne Leerzeichen ein!");
             if(socialSecurityNumber == null || socialSecurityNumber.length() != 10){
                 System.out.println("(!) Die Sozialversicherungsnummer muss genau 10 Stellen haben.");
             } else {
-                // Prüfen, ob es sich nur um Zahlen handelt.
+                // Prüfen, ob es sich nur um Zahlen handelt bzw ein X an der 4. Stelle handelt
+                // Wir nehmen von vorne herein an, dass der Input gültig ist, und setzten isValidInput auf false, falls
+                // wir einen Fehler entdecken.
                 isValidInput = true;
-                for(char number : socialSecurityNumber.toCharArray()){
-                    if(!Character.isDigit(number)) isValidInput = false;
+                for(int i = 0; i < socialSecurityNumber.length(); i++){
+                    char currentLetter = socialSecurityNumber.charAt(i);
+                    // Das Zeichen ist ungültig, wenn es sich nicht um eine Zahl handelt,
+                    // und das Zeichen weder ein X noch an vierter Stelle ist.
+                    if(!Character.isDigit(currentLetter) && (currentLetter != 'X' || i != 3)){
+                        isValidInput = false;
+                    }
                 }
-                if(!isValidInput) System.out.println("(!) Die Sozialversicherungsnummer darf nur aus Zahlen bestehen!");
+
+                if(!isValidInput){
+                    System.out.println("(!) Die Sozialversicherungsnummer darf nur aus Zahlen bestehen!");
+                }
             }
         }
 
-        // Die Sozialversicherungsnummer ist jetzt syntaktisch korrekt vorhanden
+        // Wenn die 4. Stelle (Index 3) ein X ist, ist die Nummer unvollständig.
+        boolean isCompleteNumber = socialSecurityNumber.charAt(3) != 'X';
 
-        // Auslesen der Prüfziffer aus der Eingabe, indem der char an der jeweiligen Position extrahiert wird
-        // und dessen numerischer Wert ausgelesen wird.
-        int checkNumber = Character.getNumericValue(socialSecurityNumber.charAt(3));
-
-        // Errechnen der korrekten Prüfziffer.
+        // Die korrekte Prüfziffer wird ausgerechnet.
         int calculatedCheckNumber = getCheckNumber(socialSecurityNumber);
 
-        // Vergleich der beiden Prüfziffern.
-        if(calculatedCheckNumber != checkNumber){
-            System.out.println("(!) Die Sozialversicherungsnummer ist nicht gültig!");
-        } else {
-            System.out.println("Die Sozialversicherungsnummer ist gültig!");
+        if(isCompleteNumber){ // Die Nummer ist vollständig und soll überprüft werden.
+            // Auslesen der Prüfziffer aus der Eingabe, indem der char an der jeweiligen Position extrahiert wird
+            // und dessen numerischer Wert ausgelesen wird.
+            int checkNumber = Character.getNumericValue(socialSecurityNumber.charAt(3));
+
+            // Vergleich der beiden Prüfziffern.
+            if(calculatedCheckNumber != checkNumber){
+                System.out.println("(!) Die Sozialversicherungsnummer ist nicht gültig!");
+            } else {
+                System.out.println("Die Sozialversicherungsnummer ist gültig!");
+            }
+        } else { // Die Nummer ist unvollständig und das X soll durch die errechnete Prüfziffer ersetzt werden.
+            if(calculatedCheckNumber == 10){
+                System.out.println("(!) Diese laufende Nummer gibt es am gewählten Tag nicht.");
+            } else {
+                String completeNumber = socialSecurityNumber.replace("X", String.valueOf(calculatedCheckNumber));
+                System.out.println("Die vollständige Nummer lautet " + completeNumber + ".");
+            }
         }
 
     }

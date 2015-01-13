@@ -4,7 +4,7 @@ public class PassportReader {
 
     // Die beiden maschinenlesbaren Zeilen des Reisepasses.
     // Die Prüfziffern sind in diesem Beispiel nicht relevant.
-    public static String line1 = "P<USA<KELSO<<BOB<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
+    public static String line1 = "P<USAKELSO<<BOB<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
     public static String line2 = "L0287498<3USA4010120M160505<<<<<<<<<<<<<<<<5";
 
     public static void main(String[] args){
@@ -12,8 +12,8 @@ public class PassportReader {
         System.out.println("Nationalität: " + line1.substring(2, 5));
 
         // Der Nachname kommt nach der Nationalität und geht bis zum nächsten <<.
-        int endOfLastName = line1.indexOf("<<", 6);
-        System.out.println("Nachname: " + line1.substring(6, endOfLastName));
+        int endOfLastName = line1.indexOf("<<", 5);
+        System.out.println("Nachname: " + line1.substring(5, endOfLastName));
 
         // Der Vorname kommt nach dem Nachnamen und geht bis zum nächsten <<
         // (ein < alleine wäre das Trennzeichen für den 2. Vornamen)

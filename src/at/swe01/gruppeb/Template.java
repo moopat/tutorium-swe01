@@ -1,5 +1,8 @@
 package at.swe01.gruppeb;
 
+/**
+ * Diese Klasse wurde 1:1 aus Moodle übernommen.
+ */
 public class Template {
     private static java.io.BufferedReader userInputBR = null;
     public static void main(String[] args) {

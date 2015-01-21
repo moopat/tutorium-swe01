@@ -1,4 +1,4 @@
-package at.swe01.gruppeA;
+package at.swe01.gruppea;
 
 public class BSprache {
 
